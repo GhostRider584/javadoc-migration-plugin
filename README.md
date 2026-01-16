@@ -1,7 +1,7 @@
 # Javadoc Migration Plugin
 ![Java](https://img.shields.io/badge/Java-orange?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Gradle](https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white)
-![Version](https://img.shields.io/badge/version-1.0.0-248cd6?labelColor=&style=for-the-badge)
+![Version](https://img.shields.io/badge/version-0.0.1-248cd6?labelColor=&style=for-the-badge)
 ![License: MIT](https://img.shields.io/badge/License-MIT-7267db.svg?style=for-the-badge)
 
 A Gradle plugin to preserve and distribute Javadocs across decompiled source updates.
@@ -14,17 +14,29 @@ A Gradle plugin to preserve and distribute Javadocs across decompiled source upd
 
 ## Usage
 
-### 1. Apply the Plugin
+### 1. Configure Plugin Repository
+Since this plugin is hosted on the Smolder repository, you must tell Gradle where to find it.
+Add this to your `settings.gradle.kts` file:
+
+```kotlin
+pluginManagement {
+    repositories {
+        maven("https://repo.smolder.fr/public/")
+        gradlePluginPortal()
+    }
+}
+```
+
+### 2. Apply the Plugin
 In your `build.gradle.kts`:
 
 ```kotlin
 plugins {
-    id("fr.smolder.javadoc.migration")
+    id("fr.smolder.javadoc.migration") version "0.0.1"
 }
 ```
 
-### 2. Configure the Migration
-
+### 3. Configure the Migration
 ```kotlin
 javadocMigration {
     // Your documented source directory

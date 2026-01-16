@@ -1,5 +1,6 @@
 plugins {
     `kotlin-dsl`
+    `maven-publish`
 }
 
 group = "fr.smolder.javadoc"
@@ -16,9 +17,22 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        create("javadocMigration") {
+        create("javadocMigration").apply {
             id = "fr.smolder.javadoc.migration"
             implementationClass = "fr.smolder.javadoc.JavadocMigrationPlugin"
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "Smolder"
+            url = uri("https://repo.smolder.fr/public/")
+            credentials {
+                username = project.findProperty("smolderUsername") as String?
+                password = project.findProperty("smolderPassword") as String?
+            }
         }
     }
 }
